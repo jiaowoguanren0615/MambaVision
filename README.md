@@ -96,11 +96,11 @@ On the second machine: python -m torch.distributed.run --nproc_per_node=1 --nnod
 
 ## Citation
 ```
-@article{chen2022pali,
-  title={Pali: A jointly-scaled multilingual language-image model},
-  author={Chen, Xi and Wang, Xiao and Changpinyo, Soravit and Piergiovanni, AJ and Padlewski, Piotr and Salz, Daniel and Goodman, Sebastian and Grycner, Adam and Mustafa, Basil and Beyer, Lucas and others},
-  journal={arXiv preprint arXiv:2209.06794},
-  year={2022}
+@inproceedings{Hatamizadeh2024MambaVisionAH,
+  title={MambaVision: A Hybrid Mamba-Transformer Vision Backbone},
+  author={Ali Hatamizadeh and Jan Kautz},
+  year={2024},
+  url={https://api.semanticscholar.org/CorpusID:271097462}
 }
 ```
 
