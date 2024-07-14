@@ -90,8 +90,8 @@ def get_args_parser():
     # Learning rate schedule parameters
     parser.add_argument('--sched', default='cosine', type=str, metavar='SCHEDULER',
                         help='LR scheduler (default: "cosine"')
-    parser.add_argument('--lr', type=float, default=1e-3, metavar='LR',
-                        help='learning rate (default: 1e-3)')
+    parser.add_argument('--lr', type=float, default=5e-3, metavar='LR',
+                        help='learning rate (default: 5e-3)')
     parser.add_argument('--lr-ep', action='store_true', default=False,
                         help='using the epoch-based scheduler')
     parser.add_argument('--lr-noise', type=float, nargs='+', default=None, metavar='pct, pct',
@@ -232,10 +232,11 @@ def get_args_parser():
 
 def main(args):
     print(args)
+    writer = SummaryWriter(os.path.join(args.writer_output, 'runs'))
     utils.init_distributed_mode(args)
 
-    if args.local_rank == 0:
-        writer = SummaryWriter(os.path.join(args.writer_output, 'runs'))
+    # if args.local_rank == 0:
+    #     writer = SummaryWriter(os.path.join(args.writer_output, 'runs'))
 
     if args.distillation_type != 'none' and args.finetune and not args.eval:
         raise NotImplementedError(
