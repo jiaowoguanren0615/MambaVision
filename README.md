@@ -5,8 +5,8 @@ This is a warehouse for MambaVision-Pytorch-model, can be used to train your ima
 ### [MambaVision: A Hybrid Mamba-Transformer Vision Backbone](https://arxiv.org/pdf/2407.08083)  
 ### [Large Batch Optimization for Deep Learning: Training BERT in 76 minutes](https://arxiv.org/abs/1904.00962)   
 
-![image](https://github.com/jiaowoguanren0615/VisionTransformer/blob/main/sample_png/KAN-model.jpg)  
-![image](https://production-media.paperswithcode.com/methods/Screen_Shot_2021-01-26_at_9.43.31_PM_uI4jjMq.png)  
+![image](https://github.com/jiaowoguanren0615/MambaVision/blob/main/sample_png/1720946952217.jpg)  
+![image](https://github.com/jiaowoguanren0615/MambaVision/blob/main/sample_png/1720947030019.jpg)  
 
 
 ## Preparation
