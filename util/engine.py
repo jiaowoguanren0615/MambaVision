@@ -78,6 +78,8 @@ def train_one_epoch(model: torch.nn.Module, criterion: DistillationLoss,
 
         if not math.isfinite(loss_value):
             print("Loss is {}, stopping training".format(loss_value))
+            utils.cleanup_ddp()
+            torch.cuda.empty_cache()
             sys.exit(1)
 
         optimizer.zero_grad()
