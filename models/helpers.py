@@ -5,23 +5,20 @@ Due to my conda virtual environment (torch==1.13.0+cu118), I wrote this function
 for using build attention blocks in build_cls_models.py(line 440).
 """
 import torch
+import torch.nn as nn
 import math
 from typing import Optional
+import torch.nn.functional as F
 
 
-def scaled_dot_product_attention(query: torch.Tensor,
-                                 key: torch.Tensor,
-                                 value: torch.Tensor,
-                                 attn_mask: Optional[torch.Tensor] = None,
-                                 dropout_p: float = 0.0,
-                                 is_causal=False,
-                                 scale: Optional[float] = None,
+def scaled_dot_product_attention(query: torch.Tensor, key: torch.Tensor, value: torch.Tensor,
+                                 attn_mask: Optional[torch.Tensor] = None, dropout_p: float = 0.0,
+                                 is_causal=False, scale: Optional[float] = None,
                                  device: Optional[str] = 'cuda') -> torch.Tensor:
     """
     Computes scaled dot product attention on query, key and value tensors, using an optional attention mask if passed,
     and applying dropout if a probability greater than 0.0 is specified.
     The optional scale argument can only be specified as a keyword argument.
-
 
     Args:
         query (torch.Tensor): The query tensor of shape [batch_size, num_heads, sequence_length, d_model//num_heads].
@@ -60,3 +57,38 @@ def scaled_dot_product_attention(query: torch.Tensor,
     attn_weight = torch.softmax(attn_weight, dim=-1)
     attn_weight = torch.dropout(attn_weight.to(device), dropout_p, train=True)
     return attn_weight @ value
+
+
+
+class ConvModule(nn.Sequential):
+    def __init__(self, c1, c2, k, s=1, p=0, d=1, g=1):
+        super().__init__(
+            nn.Conv2d(c1, c2, k, s, p, d, g, bias=False),
+            nn.BatchNorm2d(c2),
+            nn.ReLU(True)
+        )
+
+
+
+class PPM(nn.Module):
+    """Pyramid Pooling Module in PSPNet
+    """
+    def __init__(self, c1, c2=128, scales=(1, 2, 3, 6)):
+        super().__init__()
+        self.stages = nn.ModuleList([
+            nn.Sequential(
+                nn.AdaptiveAvgPool2d(scale),
+                ConvModule(c1, c2, 1)
+            )
+        for scale in scales])
+
+        self.bottleneck = ConvModule(c1 + c2 * len(scales), c2, 3, 1, 1)
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        outs = []
+        for stage in self.stages:
+            outs.append(F.interpolate(stage(x), size=x.shape[-2:], mode='bilinear', align_corners=True))
+
+        outs = [x] + outs[::-1]
+        out = self.bottleneck(torch.cat(outs, dim=1))
+        return out

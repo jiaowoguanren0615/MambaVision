@@ -2,7 +2,6 @@ from models.build_cls_models import MambaVision
 from timm.models import register_model
 import torch
 import torch.nn as nn
-from pathlib import Path
 
 
 class SegMambaVisionBackbone(MambaVision):
@@ -46,9 +45,6 @@ class SegMambaVisionBackbone(MambaVision):
 
 @register_model
 def SegBackbone_mamba_vision_T(pretrained=False, pretrained_cfg=None, pretrained_cfg_overlay=None, **kwargs):
-    model_path = kwargs.pop("model_path", "/tmp/mamba_vision_T.pth.tar")
-    # pretrained_cfg = resolve_pretrained_cfg('mamba_vision_T').to_dict()
-    # _update_default_kwargs(pretrained_cfg, kwargs, kwargs_filter=None)
     model = SegMambaVisionBackbone(depths=[1, 3, 8, 4],
                                    num_heads=[2, 4, 8, 16],
                                    window_size=[8, 8, 14, 7],
@@ -58,21 +54,11 @@ def SegBackbone_mamba_vision_T(pretrained=False, pretrained_cfg=None, pretrained
                                    resolution=224,
                                    drop_path_rate=0.2,
                                    **kwargs)
-    model.pretrained_cfg = pretrained_cfg
-    model.default_cfg = model.pretrained_cfg
-    if pretrained:
-        if not Path(model_path).is_file():
-            url = model.default_cfg['url']
-            torch.hub.download_url_to_file(url=url, dst=model_path)
-        model._load_state_dict(model_path)
     return model
 
 
 @register_model
 def SegBackbone_mamba_vision_T2(pretrained=False, pretrained_cfg=None, pretrained_cfg_overlay=None, **kwargs):
-    model_path = kwargs.pop("model_path", "/tmp/mamba_vision_T2.pth.tar")
-    # pretrained_cfg = resolve_pretrained_cfg('mamba_vision_T2').to_dict()
-    # _update_default_kwargs(pretrained_cfg, kwargs, kwargs_filter=None)
     model = SegMambaVisionBackbone(depths=[1, 3, 11, 4],
                                    num_heads=[2, 4, 8, 16],
                                    window_size=[8, 8, 14, 7],
@@ -82,21 +68,11 @@ def SegBackbone_mamba_vision_T2(pretrained=False, pretrained_cfg=None, pretraine
                                    resolution=224,
                                    drop_path_rate=0.2,
                                    **kwargs)
-    model.pretrained_cfg = pretrained_cfg
-    model.default_cfg = model.pretrained_cfg
-    if pretrained:
-        if not Path(model_path).is_file():
-            url = model.default_cfg['url']
-            torch.hub.download_url_to_file(url=url, dst=model_path)
-        model._load_state_dict(model_path)
     return model
 
 
 @register_model
 def SegBackbone_mamba_vision_S(pretrained=False, pretrained_cfg=None, pretrained_cfg_overlay=None, **kwargs):
-    model_path = kwargs.pop("model_path", "/tmp/mamba_vision_S.pth.tar")
-    # pretrained_cfg = resolve_pretrained_cfg('mamba_vision_S').to_dict()
-    # _update_default_kwargs(pretrained_cfg, kwargs, kwargs_filter=None)
     model = SegMambaVisionBackbone(depths=[3, 3, 7, 5],
                                    num_heads=[2, 4, 8, 16],
                                    window_size=[8, 8, 14, 7],
@@ -106,21 +82,11 @@ def SegBackbone_mamba_vision_S(pretrained=False, pretrained_cfg=None, pretrained
                                    resolution=224,
                                    drop_path_rate=0.2,
                                    **kwargs)
-    model.pretrained_cfg = pretrained_cfg
-    model.default_cfg = model.pretrained_cfg
-    if pretrained:
-        if not Path(model_path).is_file():
-            url = model.default_cfg['url']
-            torch.hub.download_url_to_file(url=url, dst=model_path)
-        model._load_state_dict(model_path)
     return model
 
 
 @register_model
 def SegBackbone_mamba_vision_B(pretrained=False, pretrained_cfg=None, pretrained_cfg_overlay=None, **kwargs):
-    model_path = kwargs.pop("model_path", "/tmp/mamba_vision_B.pth.tar")
-    # pretrained_cfg = resolve_pretrained_cfg('mamba_vision_B').to_dict()
-    # _update_default_kwargs(pretrained_cfg, kwargs, kwargs_filter=None)
     model = SegMambaVisionBackbone(depths=[3, 3, 10, 5],
                                    num_heads=[2, 4, 8, 16],
                                    window_size=[8, 8, 14, 7],
@@ -132,21 +98,11 @@ def SegBackbone_mamba_vision_B(pretrained=False, pretrained_cfg=None, pretrained
                                    layer_scale=1e-5,
                                    layer_scale_conv=None,
                                    **kwargs)
-    model.pretrained_cfg = pretrained_cfg
-    model.default_cfg = model.pretrained_cfg
-    if pretrained:
-        if not Path(model_path).is_file():
-            url = model.default_cfg['url']
-            torch.hub.download_url_to_file(url=url, dst=model_path)
-        model._load_state_dict(model_path)
     return model
 
 
 @register_model
 def SegBackbone_mamba_vision_L(pretrained=False, pretrained_cfg=None, pretrained_cfg_overlay=None, **kwargs):
-    model_path = kwargs.pop("model_path", "/tmp/mamba_vision_L.pth.tar")
-    # pretrained_cfg = resolve_pretrained_cfg('mamba_vision_L').to_dict()
-    # _update_default_kwargs(pretrained_cfg, kwargs, kwargs_filter=None)
     model = SegMambaVisionBackbone(depths=[3, 3, 10, 5],
                                    num_heads=[4, 8, 16, 32],
                                    window_size=[8, 8, 14, 7],
@@ -158,21 +114,11 @@ def SegBackbone_mamba_vision_L(pretrained=False, pretrained_cfg=None, pretrained
                                    layer_scale=1e-5,
                                    layer_scale_conv=None,
                                    **kwargs)
-    model.pretrained_cfg = pretrained_cfg
-    model.default_cfg = model.pretrained_cfg
-    if pretrained:
-        if not Path(model_path).is_file():
-            url = model.default_cfg['url']
-            torch.hub.download_url_to_file(url=url, dst=model_path)
-        model._load_state_dict(model_path)
     return model
 
 
 @register_model
 def SegBackbone_mamba_vision_L2(pretrained=False, pretrained_cfg=None, pretrained_cfg_overlay=None, **kwargs):
-    model_path = kwargs.pop("model_path", "/tmp/mamba_vision_L2.pth.tar")
-    # pretrained_cfg = resolve_pretrained_cfg('mamba_vision_L2').to_dict()
-    # _update_default_kwargs(pretrained_cfg, kwargs, kwargs_filter=None)
     model = SegMambaVisionBackbone(depths=[3, 3, 12, 5],
                                    num_heads=[4, 8, 16, 32],
                                    window_size=[8, 8, 14, 7],
@@ -184,11 +130,4 @@ def SegBackbone_mamba_vision_L2(pretrained=False, pretrained_cfg=None, pretraine
                                    layer_scale=1e-5,
                                    layer_scale_conv=None,
                                    **kwargs)
-    model.pretrained_cfg = pretrained_cfg
-    model.default_cfg = model.pretrained_cfg
-    if pretrained:
-        if not Path(model_path).is_file():
-            url = model.default_cfg['url']
-            torch.hub.download_url_to_file(url=url, dst=model_path)
-        model._load_state_dict(model_path)
     return model

@@ -29,6 +29,7 @@ This is a warehouse for MambaVision-Pytorch-model, can be used to train your ima
     ├── helpers.py: Compute scaled dot product attention
     ├── seg_model_backbones.py: Construct MambaVision as segmentation-model backbones
     ├── segformer_head.py: Construct Segformer Head
+    ├── upernet_head.py: Construct UperNet Head
 ├── scheduler:
     ├──scheduler_main.py: Fundamental Scheduler module
     ├──scheduler_factory.py: Create lr_scheduler methods according to parameters what you set
@@ -122,5 +123,15 @@ On the second machine: python -m torch.distributed.run --nproc_per_node=1 --nnod
   author={You, Yang and Li, Jing and Reddi, Sashank and Hseu, Jonathan and Kumar, Sanjiv and Bhojanapalli, Srinadh and Song, Xiaodan and Demmel, James and Keutzer, Kurt and Hsieh, Cho-Jui},
   journal={arXiv preprint arXiv:1904.00962},
   year={2019}
+}
+```
+
+```
+@inproceedings{xiao2018unified,
+  title={Unified perceptual parsing for scene understanding},
+  author={Xiao, Tete and Liu, Yingcheng and Zhou, Bolei and Jiang, Yuning and Sun, Jian},
+  booktitle={Proceedings of the European conference on computer vision (ECCV)},
+  pages={418--434},
+  year={2018}
 }
 ```
