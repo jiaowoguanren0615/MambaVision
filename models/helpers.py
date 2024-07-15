@@ -2,7 +2,7 @@
 This function can be found in torch.nn.Functional.scaled_dot_product_attention if torch version >= 2.0.X.
 
 Due to my conda virtual environment (torch==1.13.0+cu118), I wrote this function to compute scaled dot product attention \
-for using build attention blocks in build_models.py(line 440).
+for using build attention blocks in build_cls_models.py(line 440).
 """
 import torch
 import math

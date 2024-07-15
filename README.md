@@ -24,8 +24,11 @@ This is a warehouse for MambaVision-Pytorch-model, can be used to train your ima
     ├── split_data.py: Define the function to read the image dataset and divide the training-set and test-set
     ├── threeaugment.py: Additional data augmentation methods
 ├── models: MambaVision Model
-    ├── build_models.py: Construct MambaVision models
+    ├── build_cls_models.py: Construct MambaVision models for image classification
+    ├── build_seg_models.py: Construct MambaVision models for image segmentation
     ├── helpers.py: Compute scaled dot product attention
+    ├── seg_model_backbones.py: Construct MambaVision as segmentation-model backbones
+    ├── segformer_head.py: Construct Segformer Head
 ├── scheduler:
     ├──scheduler_main.py: Fundamental Scheduler module
     ├──scheduler_factory.py: Create lr_scheduler methods according to parameters what you set
@@ -101,6 +104,15 @@ On the second machine: python -m torch.distributed.run --nproc_per_node=1 --nnod
   author={Ali Hatamizadeh and Jan Kautz},
   year={2024},
   url={https://api.semanticscholar.org/CorpusID:271097462}
+}
+```
+
+```
+@inproceedings{xie2021segformer,
+  title={SegFormer: Simple and Efficient Design for Semantic Segmentation with Transformers},
+  author={Xie, Enze and Wang, Wenhai and Yu, Zhiding and Anandkumar, Anima and Alvarez, Jose M and Luo, Ping},
+  booktitle={Neural Information Processing Systems (NeurIPS)},
+  year={2021}
 }
 ```
 
