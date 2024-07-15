@@ -1,17 +1,20 @@
 from models.segformer_head import SegFormerHead
 from models.upernet_head import UPerHead
+from models.maskrcnn_head import MaskRCNNSegmentationHead
 import torch.nn.functional as F
 from models.seg_model_backbones import *
 
+
 class SegMambaVisionModel(nn.Module):
-    def __init__(self, backbone, num_classes=19, use_segformer_head=False, **kwargs):
+    def __init__(self, backbone, num_classes=19, use_maskrcnn_head=False, **kwargs):
         super(SegMambaVisionModel, self).__init__()
 
         self.backbone = eval(backbone + '()')
 
-        if use_segformer_head == True:
-            self.decode_head = SegFormerHead(self.backbone.feature_dims, 256 if 'T' in backbone or 'S' in backbone else 768,
-                                             num_classes)
+        if use_maskrcnn_head == True:
+            self.decode_head = MaskRCNNSegmentationHead(self.backbone.feature_dims,
+                                                        256 if 'T' in backbone or 'S' in backbone else 768,
+                                                        num_classes)
         else:
             self.decode_head = UPerHead(self.backbone.feature_dims, 128 if 'T' in backbone or 'S' in backbone else 768,
                                         num_classes)
@@ -63,7 +66,6 @@ def SegMambaVision_L2(pretrained=False, pretrained_cfg=None, pretrained_cfg_over
     backbone = 'SegBackbone_mamba_vision_L2'
     model = SegMambaVisionModel(backbone, **kwargs)
     return model
-
 
 # if __name__ == '__main__':
 #     import torch
